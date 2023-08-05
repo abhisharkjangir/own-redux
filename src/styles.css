@@ -1,0 +1,21 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+button {
+  background-color: black;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.counter {
+  border: 1px solid #000;
+  padding: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}

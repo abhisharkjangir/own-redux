@@ -1,15 +1,3 @@
-const compose = (...args) => {
-  return (store) => {
-    return (next) => {
-      return (action) => {
-        return args[0].reduce((acc, fn) => {
-          return fn(acc)(next)(action);
-        }, store);
-      };
-    };
-  };
-};
-
 const createStore = (rootReducer, intialState, middlewares) => {
   let state = intialState ?? {};
   let listeners = [];
@@ -17,22 +5,9 @@ const createStore = (rootReducer, intialState, middlewares) => {
   const getState = () => state;
 
   const dispatch = (action) => {
-    const next = (state) => {
-      let updatedState = rootReducer(state, action);
-      listeners.forEach((listener) => listener(updatedState));
-      return updatedState;
-    };
-
-    if (middlewares.length) {
-      let updatedState = compose(middlewares)({ dispatch, getState })(next)(
-        action
-      );
-      console.log(">>>", updatedState);
-
-      state = next(updatedState);
-    } else {
-      state = next(state);
-    }
+    state = rootReducer(state, action);
+    listeners.forEach((listener) => listener(state));
+    return state;
   };
 
   const subscribe = (fn) => {
@@ -45,7 +20,7 @@ const createStore = (rootReducer, intialState, middlewares) => {
   return {
     dispatch,
     getState,
-    subscribe
+    subscribe,
   };
 };
 

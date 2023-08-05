@@ -1,4 +1,3 @@
-import AsyncCounter from "./AsyncCounter";
 import Counter from "./counter";
 import CounterUsingHooks from "./CounterUsingHooks";
 import "./styles.css";
@@ -8,7 +7,6 @@ export default function App() {
     <>
       <Counter />
       <CounterUsingHooks />
-      <AsyncCounter />
     </>
   );
 }
